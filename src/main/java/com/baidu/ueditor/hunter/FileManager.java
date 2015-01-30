@@ -21,17 +21,16 @@ public class FileManager {
 	private int count = 0;
 	private String host = "";
 	public FileManager ( Map<String, Object> conf ) {
-
 		this.rootPath = (String)conf.get( "rootPath" );
-		this.dir = this.rootPath + (String)conf.get( "dir" );
+		//如何判断jetty 还是tomcat
+		this.dir = this.rootPath +"/../"+ (String)conf.get( "dir" );
 		this.allowFiles = this.getAllowFiles( conf.get("allowFiles") );
 		this.count = (Integer)conf.get( "count" );
 		this.host = (String) conf.get("host");
 	}
 	
 	public State listFile ( int index ) {
-		
-		File dir = new File( this.dir );
+		File dir = new File( this.dir);
 		State state = null;
 
 		if ( !dir.exists() ) {

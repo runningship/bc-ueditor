@@ -29,7 +29,7 @@ public class ActionEnter {
 		this.rootPath = rootPath;
 		this.actionType = request.getParameter( "action" );
 		this.contextPath = request.getContextPath();
-		String host = "http://"+request.getLocalAddr()+":"+request.getLocalPort()+request.getContextPath();
+		String host = "http://"+request.getLocalAddr()+":"+request.getLocalPort()+request.getContextPath()+"/";
 //		String host =request.getContextPath();
 		this.configManager = ConfigManager.getInstance( host,this.rootPath, this.contextPath, request.getRequestURI() );
 		
