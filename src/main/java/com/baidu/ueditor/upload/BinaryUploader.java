@@ -54,9 +54,9 @@ public class BinaryUploader {
 			}
 
 			String savePath = (String) conf.get("savePath");
-//			if(!request.getSession().getServletContext().getServerInfo().startsWith("jetty")){
+			if(!request.getSession().getServletContext().getServerInfo().startsWith("jetty")){
 				savePath = "/../"+savePath;
-//			}
+			}
 			String originFileName = fileStream.getName();
 			String suffix = FileType.getSuffixByFilename(originFileName);
 
@@ -94,8 +94,12 @@ public class BinaryUploader {
 	}
 
 	private static boolean validType(String type, String[] allowTypes) {
-		List<String> list = Arrays.asList(allowTypes);
-
-		return list.contains(type);
+		//只要不是.exe都可以上传，妥妥的
+		if(type.endsWith(".exe")){
+			return false;
+		}
+		return true;
+//		List<String> list = Arrays.asList(allowTypes);
+//		return list.contains(type);
 	}
 }
