@@ -34,6 +34,7 @@ public final class ConfigManager {
 	// 远程图片抓取filename定义
 	private final static String REMOTE_FILE_NAME = "remote";
 	
+	public String serverName;
 	/*
 	 * 通过一个给定的路径构建一个配置管理器， 该管理器要求地址路径所在目录下必须存在config.properties文件
 	 */
@@ -143,7 +144,7 @@ public final class ConfigManager {
 				break;
 				
 		}
-		
+		savePath = savePath.replace("${serverName}", serverName);
 		conf.put( "savePath", savePath );
 		conf.put( "rootPath", this.rootPath );
 		

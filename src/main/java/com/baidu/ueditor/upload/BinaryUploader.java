@@ -55,7 +55,7 @@ public class BinaryUploader {
 
 			String savePath = (String) conf.get("savePath");
 //			if(!request.getSession().getServletContext().getServerInfo().startsWith("jetty")){
-				savePath = "/../"+savePath;
+//				savePath = "/../"+savePath;
 //			}
 			String originFileName = fileStream.getName();
 			String suffix = FileType.getSuffixByFilename(originFileName);
@@ -78,9 +78,8 @@ public class BinaryUploader {
 			State storageState = StorageManager.saveFileByInputStream(is,
 					physicalPath, maxSize);
 			is.close();
-
 			if (storageState.isSuccess()) {
-				storageState.putInfo("url", PathFormat.format(savePath));
+				storageState.putInfo("url", PathFormat.format(request.getServletContext().getContextPath()+savePath));
 				storageState.putInfo("type", suffix);
 				storageState.putInfo("original", originFileName + suffix);
 			}
