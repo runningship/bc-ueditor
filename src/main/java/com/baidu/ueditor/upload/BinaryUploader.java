@@ -71,15 +71,15 @@ public class BinaryUploader {
 			}
 
 			savePath = PathFormat.parse(savePath, originFileName);
-
-			String physicalPath = (String) conf.get("rootPath") + savePath;
-
+			
+			String physicalPath = request.getAttribute("upload_path") + savePath;
+//			String physicalPath = (String) conf.get("rootPath") + savePath;
 			InputStream is = fileStream.openStream();
 			State storageState = StorageManager.saveFileByInputStream(is,
 					physicalPath, maxSize);
 			is.close();
 			if (storageState.isSuccess()) {
-				storageState.putInfo("url", PathFormat.format(request.getServletContext().getContextPath()+savePath));
+				storageState.putInfo("url", PathFormat.format(request.getAttribute("download_prefix") +savePath));
 				storageState.putInfo("type", suffix);
 				storageState.putInfo("original", originFileName + suffix);
 			}
